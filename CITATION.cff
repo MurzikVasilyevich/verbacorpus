@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "verba — Ukrainian Proverbs Corpus"
+message: "If you use this dataset, please cite it as below."
+type: dataset
+authors:
+  - given-names: Dmytro
+    family-names: Yemelianov
+    orcid: "https://orcid.org/0009-0002-9244-7426"
+version: 1.0.0
+date-released: "2026-06-24"
+url: "https://verbacorpus.org"
+repository-code: "https://github.com/MurzikVasilyevich/verbacorpus"
+license: CC-BY-4.0
+keywords:
+  - Ukrainian
+  - proverbs
+  - paremiology
+  - folklore
+  - NLP
+  - corpus
+  - "prysliv'ya"
