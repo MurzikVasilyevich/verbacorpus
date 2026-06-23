@@ -11,6 +11,10 @@ export type SearchOpts = {
   q?: string; category?: string; source?: string; limit?: number; offset?: number;
 };
 
+export type QueryOpts = {
+  category?: string; source?: string; variant_group?: string; has_explanation?: boolean; explanationIds?: Set<string>; limit?: number; offset?: number; unbounded?: boolean;
+};
+
 export type FilterOpts = {
   q?: string; category?: string; source?: string;
 };
@@ -44,7 +48,7 @@ export function randomProverb(
 
 export function queryProverbs(
   all: Proverb[],
-  opts: { category?: string; source?: string; variant_group?: string; has_explanation?: boolean; explanationIds?: Set<string>; limit?: number; offset?: number },
+  opts: QueryOpts,
 ): { total: number; results: Proverb[] } {
   const limit = Math.min(Math.max(opts.limit ?? 50, 1), 200);
   const offset = Math.max(opts.offset ?? 0, 0);
@@ -58,5 +62,6 @@ export function queryProverbs(
     }
     return true;
   });
-  return { total: matched.length, results: matched.slice(offset, offset + limit) };
+  const results = opts.unbounded ? matched : matched.slice(offset, offset + limit);
+  return { total: matched.length, results };
 }

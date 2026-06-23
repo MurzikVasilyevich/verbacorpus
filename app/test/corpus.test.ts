@@ -71,4 +71,13 @@ describe("queryProverbs", () => {
     expect(r.total).toBe(3);
     expect(r.results.length).toBe(1);
   });
+  it("unbounded returns all rows (no clamp)", () => {
+    const big: Proverb[] = Array.from({ length: 250 }, (_, i) => ({
+      id: `p${i}`, text: `t${i}`, modern_text: `m${i}`, category: ["test"], sources: ["S"], variant_group: "",
+    }));
+    expect(queryProverbs(big, {}).results.length).toBe(50); // default clamp
+    const unb = queryProverbs(big, { unbounded: true });
+    expect(unb.results.length).toBe(250);
+    expect(unb.total).toBe(250);
+  });
 });

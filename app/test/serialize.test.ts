@@ -14,6 +14,9 @@ describe("negotiate", () => {
     expect(negotiate(null, "*/*")).toBe("json");
     expect(negotiate(null, null)).toBe("json");
   });
+  it("tsv via Accept header", () => {
+    expect(negotiate(null, "text/tab-separated-values")).toBe("tsv");
+  });
 });
 
 describe("serialize", () => {

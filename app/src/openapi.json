@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Ukrainian Proverbs API",
-    "description": "REST API for the Ukrainian Proverbs Corpus — 40 444 proverbs, sayings and expressions from four historical collections. Supports JSON, JSONL, XML, CSV and TSV output via ?format= or Accept negotiation.",
+    "description": "REST API for the Ukrainian Proverbs Corpus — 48 787 proverbs, sayings and expressions from four historical collections. Supports JSON, JSONL, XML, CSV and TSV output via ?format= or Accept negotiation.",
     "version": "1.0.0",
     "license": { "name": "CC0-1.0", "url": "https://creativecommons.org/publicdomain/zero/1.0/" }
   },

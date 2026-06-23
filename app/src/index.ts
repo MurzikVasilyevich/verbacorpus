@@ -62,14 +62,14 @@ export default {
       const path = raw.startsWith("/api/v1/") ? "/api/" + raw.slice("/api/v1/".length) : (raw === "/api/v1" ? "/api" : raw);
       const qp = url.searchParams;
 
-      // format negotiation (data endpoints); null => bad ?format
-      const fmt = negotiate(qp.get("format"), request.headers.get("accept"));
-      if (fmt === null) return J({ error: `unknown format '${qp.get("format")}'; use json|jsonl|xml|csv|tsv` }, 400);
-
-      // docs pointer
+      // docs pointer (static — not subject to format negotiation)
       if (path === "/api") return J({ api: "ukr-proverbs", version: "v1", docs: "/api.html", openapi: "/api/v1/openapi.json",
         endpoints: ["/api/v1/search", "/api/v1/semantic", "/api/v1/random", "/api/v1/query", "/api/v1/proverb/:id", "/api/v1/export", "/api/v1/categories", "/api/v1/meta"] });
       if (path === "/api/openapi.json") return J(openapiDoc);
+
+      // format negotiation (data endpoints); null => bad ?format
+      const fmt = negotiate(qp.get("format"), request.headers.get("accept"));
+      if (fmt === null) return J({ error: `unknown format '${qp.get("format")}'; use json|jsonl|xml|csv|tsv` }, 400);
 
       const { proverbs, explanations, meta, byId } = await load(env);
       const lim = () => finiteOrUndef(Number(qp.get("limit")));
@@ -105,7 +105,7 @@ export default {
         return respond(fmt, picked as Rec[], { total: picked.length, limit: n, offset: 0, name: "random" });
       }
       if (path === "/api/export") {
-        const r = queryProverbs(proverbs, { category: qp.get("category") ?? undefined, source: qp.get("source") ?? undefined, limit: proverbs.length, offset: 0 });
+        const r = queryProverbs(proverbs, { category: qp.get("category") ?? undefined, source: qp.get("source") ?? undefined, unbounded: true });
         const withExpl = r.results.map((p) => ({ ...p, explanation: explanations[p.id] ?? "" })) as Rec[];
         return respond(fmt, withExpl, { total: r.total, withExplanation: true, name: "export" });
       }

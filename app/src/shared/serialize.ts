@@ -31,7 +31,7 @@ const cell = (r: Rec, c: string): string => {
 };
 const csvField = (s: string): string => (/[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s);
 const tsvField = (s: string): string => s.replace(/[\t\n\r]+/g, " ");
-const xmlEsc = (s: string): string => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]!));
+const xmlEsc = (s: string): string => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]!));
 
 export function serialize(
   records: Rec[],
