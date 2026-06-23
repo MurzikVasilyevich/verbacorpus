@@ -4,6 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT="$(pwd)"
+command -v zip >/dev/null 2>&1 || { echo "ERROR: zip not found (install: apt install zip)" >&2; exit 1; }
 VERSION="$(cat VERSION)"
 TAG="v${VERSION}"
 REPO="MurzikVasilyevich/verbacorpus"
