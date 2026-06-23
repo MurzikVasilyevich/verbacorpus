@@ -144,7 +144,7 @@ a { color: var(--willow); text-underline-offset: 2px; }
 .detail-cat { font-family: var(--mono); font-size: .72rem; color: var(--faint); }
 .detail-text { font-family: var(--serif); font-weight: 500; font-size: 1.7rem; line-height: 1.22; margin: .5rem 0 0; }
 .detail-modern { font-family: var(--serif); font-style: italic; color: var(--muted); margin: .7rem 0 0; }
-.detail-expl { margin: 1.1rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--rule); color: #3b362e; line-height: 1.55; }
+.detail-expl { margin: 1.1rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--rule); color: var(--ink); line-height: 1.55; }
 .detail-variants { margin: 1.1rem 0 0; }
 .detail-variants h4 { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin: 0 0 .5rem; }
 .detail-variants li { font-family: var(--serif); color: var(--muted); margin: .3rem 0; line-height: 1.35; }
@@ -188,3 +188,32 @@ a { color: var(--willow); text-underline-offset: 2px; }
 .detail-similar li { font-family: var(--serif); color: var(--ink); margin: .35rem 0; line-height: 1.35; cursor: pointer; }
 .detail-similar li:hover { color: var(--willow); }
 .sem-hint { font-family: var(--sans); font-size: .72rem; color: var(--faint); margin-top: .4rem; }
+
+/* ---- Dark theme (auto via prefers-color-scheme + manual [data-theme] toggle) ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #191c16; --paper-2: #22261f; --ink: #e9e5d8; --muted: #a8a392;
+    --faint: #7f7b6c; --rule: #353a2e; --willow: #8fa882; --willow-deep: #bcd2af; --catkin: #d8aa54;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #191c16; --paper-2: #22261f; --ink: #e9e5d8; --muted: #a8a392;
+  --faint: #7f7b6c; --rule: #353a2e; --willow: #8fa882; --willow-deep: #bcd2af; --catkin: #d8aa54;
+  color-scheme: dark;
+}
+
+.theme-toggle-btn {
+  position: fixed; top: .8rem; right: .8rem; z-index: 10;
+  width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--rule);
+  background: var(--paper-2); color: var(--willow); cursor: pointer;
+  font-size: 1.05rem; line-height: 1; display: flex; align-items: center; justify-content: center;
+  transition: border-color .15s, color .15s;
+}
+.theme-toggle-btn:hover { border-color: var(--willow); color: var(--ink); }
+
+/* ---- Adaptivity: let the search row wrap on small screens ---- */
+@media (max-width: 560px) {
+  .search-wrap { flex-wrap: wrap; row-gap: .45rem; align-items: center; }
+  #q { flex: 1 1 100%; }
+}

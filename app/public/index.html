@@ -4,13 +4,34 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#5E7355" />
-  <meta name="description" content="Корпус українських прислів'їв, приказок та висловів — 40 444 записи з чотирьох зібрань, із пошуком за темами й джерелами." />
+  <meta name="description" content="Корпус українських прислів'їв, приказок та висловів — 48 787 записів із п'яти зібрань (1841–сучасність), із пошуком за темою, джерелом і змістом." />
   <title>verba — українські прислів'я та приказки</title>
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="stylesheet" href="/fonts/spectral.css" />
   <link rel="stylesheet" href="/styles.css" />
+  <script>
+  (function () {
+    var d = document.documentElement;
+    try { var t = localStorage.getItem("theme"); if (t === "dark" || t === "light") d.setAttribute("data-theme", t); } catch (e) {}
+    function cur() { return d.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); }
+    function meta() { var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = cur() === "dark" ? "#191c16" : "#5E7355"; }
+    addEventListener("DOMContentLoaded", function () {
+      meta();
+      var b = document.getElementById("themeToggle"); if (!b) return;
+      function sync() { var dark = cur() === "dark"; b.textContent = dark ? "☀" : "☾"; b.setAttribute("aria-label", dark ? "Світла тема" : "Темна тема"); }
+      sync();
+      b.addEventListener("click", function () {
+        var next = cur() === "dark" ? "light" : "dark";
+        d.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        sync(); meta();
+      });
+    });
+  })();
+  </script>
 </head>
 <body>
+  <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Перемкнути тему">☾</button>
   <header class="masthead">
     <div class="wrap mast-inner">
       <p class="eyebrow">Корпус народної мудрості · <span id="mastCount">40 444</span> записи</p>
