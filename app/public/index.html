@@ -3,20 +3,57 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Українські прислів'я та приказки</title>
+  <meta name="theme-color" content="#7A2E3A" />
+  <meta name="description" content="Корпус українських прислів'їв, приказок та висловів — 40 444 записи з чотирьох зібрань, із пошуком за темами й джерелами." />
+  <title>Прислів'я та приказки — корпус народної мудрості</title>
   <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="/fonts/spectral.css" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Українські прислів'я та приказки</h1>
-    <input id="q" type="search" placeholder="Пошук…" autocomplete="off" />
-    <div id="filters"></div>
-    <button id="random">Випадкове</button>
-    <p id="count"></p>
+  <header class="masthead">
+    <div class="wrap mast-inner">
+      <p class="eyebrow">Корпус народної мудрості · <span id="mastCount">40 444</span> записи</p>
+      <h1 class="wordmark">Прислів'я <span class="amp">&amp;</span> приказки</h1>
+      <p class="standfirst">Українські прислів'я, приказки та вислови — від Ількевича (1841) до сучасних зібрань, зведені в один корпус із пошуком за темою та джерелом.</p>
+    </div>
   </header>
-  <main id="results"></main>
-  <dialog id="detail"></dialog>
+
+  <section class="hero wrap" id="hero" aria-label="Прислів'я дня"></section>
+
+  <div class="controls wrap">
+    <div class="search-wrap">
+      <label class="vh" for="q">Пошук</label>
+      <input id="q" type="search" placeholder="Шукати прислів'я або слово…" autocomplete="off" spellcheck="false" />
+      <span id="count" class="count" aria-live="polite"></span>
+    </div>
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">Джерело</span>
+        <div class="chips" id="sources"></div>
+      </div>
+      <details class="theme-details" id="themeDetails">
+        <summary class="theme-summary">
+          <span class="filter-label">Теми</span>
+          <span class="theme-active" id="themeActive"></span>
+          <span class="theme-toggle"></span>
+        </summary>
+        <div class="chips chips-themes" id="themes"></div>
+      </details>
+    </div>
+  </div>
+
+  <main id="results" class="wrap"></main>
+
+  <footer class="colophon">
+    <div class="wrap">
+      <p class="col-stat" id="colStat"></p>
+      <ul class="col-sources" id="colSources"></ul>
+      <p class="col-note">Сучасні написання та теми створені автоматично і є орієнтовними; тексти подано якнайближче до джерел. <a href="https://github.com/MurzikVasilyevich/ukr-proverbs-corpus" rel="noopener">Код і дані — на GitHub</a>.</p>
+    </div>
+  </footer>
+
+  <dialog id="detail" class="detail" aria-label="Прислів'я"></dialog>
   <script type="module" src="/app.js"></script>
 </body>
 </html>
